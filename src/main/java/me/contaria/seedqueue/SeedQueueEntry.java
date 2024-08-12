@@ -44,6 +44,7 @@ public class SeedQueueEntry {
     private volatile boolean locked;
     private volatile boolean loaded;
     private volatile boolean discarded;
+    private volatile boolean prioritized = true;
 
     public SeedQueueEntry(MinecraftServer server, LevelStorage.Session session, MinecraftClient.IntegratedResourceManager resourceManager, YggdrasilAuthenticationService yggdrasilAuthenticationService, MinecraftSessionService minecraftSessionService, GameProfileRepository gameProfileRepository, @Nullable UserCache userCache) {
         this.server = server;
@@ -290,6 +291,20 @@ public class SeedQueueEntry {
      */
     public boolean isLocked() {
         return this.locked;
+    }
+
+    /**
+     * @return True if the {@link MinecraftServer} has not reached {@link SeedQueueConfig#maxWorldGenerationPercentage}.
+     */
+    public boolean isPrioritized() {
+        return this.prioritized;
+    }
+
+    /**
+     * Marks this entry as having reached {@link SeedQueueConfig#maxWorldGenerationPercentage}.
+     */
+    public void deprioritize() {
+        this.prioritized = false;
     }
 
     /**
