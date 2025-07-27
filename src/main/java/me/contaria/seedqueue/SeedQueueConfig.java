@@ -121,6 +121,7 @@ public class SeedQueueConfig implements SpeedrunConfig {
     @Config.Category("performance")
     public boolean reduceLevelList = true;
 
+    @Config.Ignored // disable chunkmap freezing
     @Config.Category("misc")
     @Config.Numbers.Whole.Bounds(min = 1, max = Integer.MAX_VALUE)
     @Config.Numbers.TextField
