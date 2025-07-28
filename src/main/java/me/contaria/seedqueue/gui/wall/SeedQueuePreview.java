@@ -263,7 +263,7 @@ public class SeedQueuePreview extends DrawableHelper {
     public static void renderBackground(int width, int height) {
         Tessellator tessellator = Tessellator.getInstance();
         BufferBuilder buffer = tessellator.getBuffer();
-        MinecraftClient.getInstance().getTextureManager().bindTexture(BACKGROUND_LOCATION);
+        MinecraftClient.getInstance().getTextureManager().bindTexture(BACKGROUND_TEXTURE);
         RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
         buffer.begin(7, VertexFormats.POSITION_TEXTURE_COLOR);
         buffer.vertex(0.0, height, 0.0).texture(0.0F, height / 32.0F).color(64, 64, 64, 255).next();

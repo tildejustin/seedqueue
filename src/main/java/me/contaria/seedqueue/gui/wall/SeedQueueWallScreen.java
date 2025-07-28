@@ -260,7 +260,7 @@ public class SeedQueueWallScreen extends Screen {
     private void drawLock(Layout.Pos pos, LockTexture lock) {
         this.setOrtho(this.client.getWindow().getFramebufferWidth(), this.client.getWindow().getFramebufferHeight());
         this.client.getTextureManager().bindTexture(lock.getId());
-        DrawableHelper.blit(
+        DrawableHelper.drawTexture(
                 pos.x,
                 pos.y,
                 0.0f,
@@ -277,7 +277,7 @@ public class SeedQueueWallScreen extends Screen {
     private void drawAnimatedTexture(AnimatedTexture texture, int x, int y, int width, int height) {
         this.client.getTextureManager().bindTexture(texture.getId());
         RenderSystem.enableBlend();
-        DrawableHelper.blit(
+        DrawableHelper.drawTexture(
                 x,
                 y,
                 0.0f,

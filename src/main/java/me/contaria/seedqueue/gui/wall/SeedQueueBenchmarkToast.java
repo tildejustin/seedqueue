@@ -20,7 +20,7 @@ public class SeedQueueBenchmarkToast implements Toast {
     @Override
     public Visibility draw(ToastManager manager, long startTime) {
         manager.getGame().getTextureManager().bindTexture(TOASTS_TEX);
-        manager.blit(0, 0, 0, 0, this.getWidth(), this.getHeight());
+        manager.drawTexture(0, 0, 0, 0, this.getWidth(), this.getHeight());
         manager.getGame().textRenderer.draw(this.title, 7.0f, 7.0f, 0xFFFF00 | 0xFF000000);
 
         this.finished |= !this.wall.isBenchmarking();

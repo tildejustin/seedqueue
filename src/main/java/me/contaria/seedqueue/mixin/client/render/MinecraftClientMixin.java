@@ -25,7 +25,7 @@ public abstract class MinecraftClientMixin {
             method = "render",
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/util/profiler/DisableableProfiler;pop()V",
+                    target = "Lnet/minecraft/util/profiler/Profiler;pop()V",
                     ordinal = 0
             ),
             slice = @Slice(

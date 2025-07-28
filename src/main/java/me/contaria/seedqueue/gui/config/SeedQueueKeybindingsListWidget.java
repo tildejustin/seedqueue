@@ -58,7 +58,7 @@ public class SeedQueueKeybindingsListWidget extends ElementListWidget<SeedQueueK
     }
 
     @Override
-    protected int getScrollbarPosition() {
+    protected int getScrollbarPositionX() {
         return this.parent.width - 6;
     }
 
@@ -96,12 +96,12 @@ public class SeedQueueKeybindingsListWidget extends ElementListWidget<SeedQueueK
 
         public CategoryEntry(String text) {
             this.text = text;
-            this.textWidth = SeedQueueKeybindingsListWidget.this.minecraft.textRenderer.getStringWidth(this.text);
+            this.textWidth = SeedQueueKeybindingsListWidget.this.client.textRenderer.getStringWidth(this.text);
         }
 
         @Override
         public void render(int index, int y, int x, int entryWidth, int entryHeight, int mouseX, int mouseY, boolean hovered, float tickDelta) {
-            SeedQueueKeybindingsListWidget.this.minecraft.textRenderer.draw(this.text, (SeedQueueKeybindingsListWidget.this.parent.width - this.textWidth) / 2.0f, (float) (y + entryHeight - SeedQueueKeybindingsListWidget.this.minecraft.textRenderer.fontHeight - 1), 0xFFFFFF);
+            SeedQueueKeybindingsListWidget.this.client.textRenderer.draw(this.text, (SeedQueueKeybindingsListWidget.this.parent.width - this.textWidth) / 2.0f, (float) (y + entryHeight - SeedQueueKeybindingsListWidget.this.client.textRenderer.fontHeight - 1), 0xFFFFFF);
         }
 
         @Override
@@ -137,7 +137,7 @@ public class SeedQueueKeybindingsListWidget extends ElementListWidget<SeedQueueK
 
         @Override
         public void render(int index, int y, int x, int entryWidth, int entryHeight, int mouseX, int mouseY, boolean hovered, float tickDelta) {
-            TextRenderer textRenderer = SeedQueueKeybindingsListWidget.this.minecraft.textRenderer;
+            TextRenderer textRenderer = SeedQueueKeybindingsListWidget.this.client.textRenderer;
             float titleX = x + 10;
             float titleY = y + entryHeight / 2.0f - textRenderer.fontHeight / 2.0f;
             textRenderer.draw(this.title, titleX, titleY, 0xFFFFFF);
@@ -196,7 +196,7 @@ public class SeedQueueKeybindingsListWidget extends ElementListWidget<SeedQueueK
             }
             String combined = text1 + " " + text2;
             int maxWidth = (SeedQueueKeybindingsListWidget.this.getRowWidth() - 195) / 2;
-            if (SeedQueueKeybindingsListWidget.this.minecraft.textRenderer.getStringWidth(combined) < maxWidth - 10) {
+            if (SeedQueueKeybindingsListWidget.this.client.textRenderer.getStringWidth(combined) < maxWidth - 10) {
                 return Collections.singletonList(combined);
             }
             List<String> texts = new ArrayList<>();
@@ -225,7 +225,7 @@ public class SeedQueueKeybindingsListWidget extends ElementListWidget<SeedQueueK
         public void render(int index, int y, int x, int entryWidth, int entryHeight, int mouseX, int mouseY, boolean hovered, float tickDelta) {
             super.render(index, y, x, entryWidth, entryHeight, mouseX, mouseY, hovered, tickDelta);
             if (SeedQueueKeybindingsListWidget.this.getSelected() != this) {
-                TextRenderer textRenderer = SeedQueueKeybindingsListWidget.this.minecraft.textRenderer;
+                TextRenderer textRenderer = SeedQueueKeybindingsListWidget.this.client.textRenderer;
                 int maxWidth = (entryWidth - 195) / 2;
                 for (int i = 0; i < this.secondaryKeys.size(); i++) {
                     SeedQueueKeybindingsListWidget.this.parent.drawCenteredString(textRenderer, this.secondaryKeys.get(i), x + entryWidth - maxWidth - maxWidth / 2, y + (entryHeight - textRenderer.fontHeight * this.secondaryKeys.size()) / 2 + textRenderer.fontHeight * i, 0xFFFFFF);

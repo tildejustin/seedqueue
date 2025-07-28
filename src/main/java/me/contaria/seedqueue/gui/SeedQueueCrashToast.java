@@ -26,15 +26,15 @@ public class SeedQueueCrashToast implements Toast {
 
         manager.getGame().getTextureManager().bindTexture(TOASTS_TEX);
         if (this.description.size() < 2) {
-            manager.blit(0, 0, 0, 0, this.getWidth(), this.getHeight());
+            manager.drawTexture(0, 0, 0, 0, this.getWidth(), this.getHeight());
         } else {
-            manager.blit(0, 0, 0, 0, this.getWidth(), 11);
+            manager.drawTexture(0, 0, 0, 0, this.getWidth(), 11);
             int y = 8;
             for (int i = 0; i < this.description.size(); i++) {
-                manager.blit(0, y, 0, 11, this.getWidth(), 10);
+                manager.drawTexture(0, y, 0, 11, this.getWidth(), 10);
                 y += 10;
             }
-            manager.blit(0, y, 0, 21, this.getWidth(), 11);
+            manager.drawTexture(0, y, 0, 21, this.getWidth(), 11);
         }
 
         manager.getGame().textRenderer.draw(this.title, 7.0f, 7.0f, 0xFFFF00 | 0xFF000000);

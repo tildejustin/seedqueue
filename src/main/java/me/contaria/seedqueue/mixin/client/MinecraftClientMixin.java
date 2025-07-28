@@ -1,6 +1,6 @@
 package me.contaria.seedqueue.mixin.client;
 
-import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
@@ -487,32 +487,12 @@ public abstract class MinecraftClientMixin {
         }
     }
 
-    @ModifyExpressionValue(
-            method = "render",
-            at = {
-                    @At(
-                            value = "FIELD",
-                            target = "Lnet/minecraft/client/options/GameOptions;debugEnabled:Z"
-                    ),
-                    @At(
-                            value = "FIELD",
-                            target = "Lnet/minecraft/client/options/GameOptions;debugProfilerEnabled:Z"
-                    )
-            }
+    @ModifyReturnValue(
+            method = "shouldMonitorTickDuration",
+            at = @At("RETURN")
     )
-    private boolean showDebugMenuOnWall(boolean enabled) {
-        return enabled || (SeedQueue.isOnWall() && SeedQueue.config.showDebugMenu);
-    }
-
-    @ModifyExpressionValue(
-            method = "render",
-            at = @At(
-                    value = "FIELD",
-                    target = "Lnet/minecraft/client/options/GameOptions;hudHidden:Z"
-            )
-    )
-    private boolean showDebugMenuOnWall2(boolean hudHidden) {
-        return hudHidden && !(SeedQueue.isOnWall() && SeedQueue.config.showDebugMenu);
+    private boolean showDebugMenuOnWall(boolean shouldMonitorTickDuration) {
+        return shouldMonitorTickDuration || (SeedQueue.isOnWall() && SeedQueue.config.showDebugMenu);
     }
 
     @WrapWithCondition(

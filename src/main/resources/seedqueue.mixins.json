@@ -38,7 +38,6 @@
     "compat.sodium.profiling.ChunkRenderManagerMixin",
     "compat.sodium.profiling.MultidrawChunkRenderBackendMixin",
     "compat.sodium.profiling.SodiumWorldRendererMixin",
-    "compat.speedrunigt.MinecraftClientMixin",
     "compat.standardsettings.MinecraftClientMixin",
     "compat.worldpreview.ThreadedAnvilChunkStorageMixin",
     "compat.worldpreview.WorldPreviewMixin",
