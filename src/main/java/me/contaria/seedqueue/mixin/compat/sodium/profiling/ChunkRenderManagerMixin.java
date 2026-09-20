@@ -73,8 +73,8 @@ public abstract class ChunkRenderManagerMixin {
             method = "updateChunks",
             at = @At("HEAD")
     )
-    private void profileImportantRebuilds(CallbackInfo ci) {
-        SeedQueueProfiler.push("important_rebuilds");
+    private void profileLazyRebuilds(CallbackInfo ci) {
+        SeedQueueProfiler.push("lazy_rebuilds");
     }
 
     @Inject(
@@ -97,12 +97,39 @@ public abstract class ChunkRenderManagerMixin {
                     target = "Lme/jellysquid/mods/sodium/client/render/chunk/compile/ChunkBuilder;performPendingUploads()Z"
             )
     )
-    private void profilePendingUploads(CallbackInfo ci) {
+    private void profilePendingUploads_updateChunks(CallbackInfo ci) {
         SeedQueueProfiler.swap("pending_uploads");
     }
 
     @Inject(
             method = "updateChunks",
+            at = @At("RETURN")
+    )
+    private void profilePop_updateChunks(CallbackInfo ci) {
+        SeedQueueProfiler.pop();
+    }
+
+    @Inject(
+            method = "updateImportantChunks()V",
+            at = @At("HEAD")
+    )
+    private void profileImportantRebuilds(CallbackInfo ci) {
+        SeedQueueProfiler.push("important_rebuilds");
+    }
+
+    @Inject(
+            method = "updateImportantChunks()V",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lme/jellysquid/mods/sodium/client/render/chunk/compile/ChunkBuilder;performPendingUploads()Z"
+            )
+    )
+    private void profilePendingUploads_updateImportantChunks(CallbackInfo ci) {
+        SeedQueueProfiler.swap("pending_uploads");
+    }
+
+    @Inject(
+            method = "updateImportantChunks()V",
             at = @At(
                     value = "INVOKE",
                     target = "Lme/jellysquid/mods/sodium/client/render/chunk/ChunkRenderBackend;upload(Lme/jellysquid/mods/sodium/client/gl/device/CommandList;Ljava/util/Iterator;)V"
@@ -113,10 +140,10 @@ public abstract class ChunkRenderManagerMixin {
     }
 
     @Inject(
-            method = "updateChunks",
+            method = "updateImportantChunks()V",
             at = @At("RETURN")
     )
-    private void profilePop_updateChunks(CallbackInfo ci) {
+    private void profilePop_updateImportantChunks(CallbackInfo ci) {
         SeedQueueProfiler.pop();
     }
 
